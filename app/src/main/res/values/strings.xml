@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AraucaWeathers</string>
+    <string name="ndice_de_calidad_del_aire">Índice de Calidad del Aire</string>
+    <string name="publicado_a_las">Publicado a las --/-- --:--</string>
+</resources>

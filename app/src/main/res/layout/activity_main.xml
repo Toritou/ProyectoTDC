@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Título Principal -->
+        <TextView
+            android:id="@+id/text_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Índice de Calidad del Aire"
+            android:textSize="24sp"
+            android:textColor="#FFFFFF"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Subtítulo -->
+        <TextView
+            android:id="@+id/text_subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Publicado a las --/-- --:--"
+            android:textSize="14sp"
+            android:textColor="#B3FFFFFF"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Contenedor del índice y la descripción -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="16dp">
+
+            <!-- Índice de Calidad -->
+            <TextView
+                android:id="@+id/text_air_quality_index"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="--"
+                android:textSize="64sp"
+                android:textColor="#00FF00"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginEnd="16dp" />
+
+            <!-- Estado -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/text_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="--"
+                    android:textSize="24sp"
+                    android:textColor="#00FF00"
+                    android:fontFamily="sans-serif-medium" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Valores de Sensores -->
+        <TextView
+            android:id="@+id/text_description"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginTop="4dp"
+            android:fontFamily="sans-serif"
+            android:text="La calidad del aire es buena."
+            android:textColor="#B3FFFFFF"
+            android:textSize="14sp" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="3"
+            android:rowCount="2"
+            android:alignmentMode="alignBounds"
+            android:useDefaultMargins="true">
+
+            <!-- PM2.5 -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/text_pm25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="--"
+                    android:textSize="16sp"
+                    android:textColor="#00FF00"
+                    android:fontFamily="sans-serif-medium" />
+
+                <TextView
+                    android:id="@+id/label_pm25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PM2.5"
+                    android:textSize="12sp"
+                    android:textColor="#B3FFFFFF"
+                    android:fontFamily="sans-serif" />
+            </LinearLayout>
+
+            <!-- PM10 -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/text_pm10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="--"
+                    android:textSize="16sp"
+                    android:textColor="#00FF00"
+                    android:fontFamily="sans-serif-medium" />
+
+                <TextView
+                    android:id="@+id/label_pm10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PM10"
+                    android:textSize="12sp"
+                    android:textColor="#B3FFFFFF"
+                    android:fontFamily="sans-serif" />
+            </LinearLayout>
+
+            <!-- PM100 -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/text_pm100"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="--"
+                    android:textSize="16sp"
+                    android:textColor="#00FF00"
+                    android:fontFamily="sans-serif-medium" />
+
+                <TextView
+                    android:id="@+id/label_pm100"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PM100"
+                    android:textSize="12sp"
+                    android:textColor="#B3FFFFFF"
+                    android:fontFamily="sans-serif" />
+            </LinearLayout>
+
+            <!-- PM2.5 Ambiental -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/text_pm25_env"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="--"
+                    android:textSize="16sp"
+                    android:textColor="#00FF00"
+                    android:fontFamily="sans-serif-medium" />
+
+                <TextView
+                    android:id="@+id/label_pm25_env"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PM2.5 Ambiente"
+                    android:textSize="12sp"
+                    android:textColor="#B3FFFFFF"
+                    android:fontFamily="sans-serif" />
+            </LinearLayout>
+
+            <!-- PM10 Ambiental -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/text_pm10_env"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="--"
+                    android:textSize="16sp"
+                    android:textColor="#00FF00"
+                    android:fontFamily="sans-serif-medium" />
+
+                <TextView
+                    android:id="@+id/label_pm10_env"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PM10 Ambiente"
+                    android:textSize="12sp"
+                    android:textColor="#B3FFFFFF"
+                    android:fontFamily="sans-serif" />
+            </LinearLayout>
+
+            <!-- PM100 Ambiental -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/text_pm100_env"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="--"
+                    android:textSize="16sp"
+                    android:textColor="#00FF00"
+                    android:fontFamily="sans-serif-medium" />
+
+                <TextView
+                    android:id="@+id/label_pm100_env"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PM100 Ambiente"
+                    android:textSize="12sp"
+                    android:textColor="#B3FFFFFF"
+                    android:fontFamily="sans-serif" />
+            </LinearLayout>
+            <!-- Botón para actualizar -->
+            <Button
+                android:id="@+id/btn_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Actualizar"
+                android:layout_gravity="center"
+                android:padding="8dp"
+                android:textSize="16sp"
+                android:layout_marginBottom="16dp" />
+        </GridLayout>
+    </LinearLayout>
+</ScrollView>
