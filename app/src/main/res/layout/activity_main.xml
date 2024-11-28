@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    android:background="#1E1E2C"
     android:padding="16dp">
 
     <LinearLayout
@@ -10,99 +9,111 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Título Principal -->
-        <TextView
-            android:id="@+id/text_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Índice de Calidad del Aire"
-            android:textSize="24sp"
-            android:textColor="#FFFFFF"
-            android:fontFamily="sans-serif-medium"
-            android:gravity="center"
-            android:layout_marginBottom="8dp" />
-
-        <!-- Subtítulo -->
-        <TextView
-            android:id="@+id/text_subtitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Publicado a las --/-- --:--"
-            android:textSize="14sp"
-            android:textColor="#B3FFFFFF"
-            android:fontFamily="sans-serif"
-            android:gravity="center"
-            android:layout_marginBottom="16dp" />
-
-        <!-- Contenedor del índice y la descripción -->
+        <!-- Encabezado -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginBottom="16dp">
+            android:gravity="center_vertical"
+            android:padding="16dp"
+            android:background="#292B36"
+            android:layout_marginBottom="16dp"
+            android:elevation="6dp"
+            android:clipToPadding="false"
+            android:layout_margin="8dp">
 
-            <!-- Índice de Calidad -->
-            <TextView
-                android:id="@+id/text_air_quality_index"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="--"
-                android:textSize="64sp"
-                android:textColor="#00FF00"
-                android:fontFamily="sans-serif-medium"
-                android:layout_marginEnd="16dp" />
-
-            <!-- Estado -->
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_weight="1">
 
                 <TextView
-                    android:id="@+id/text_status"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/text_title"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="--"
-                    android:textSize="24sp"
-                    android:textColor="#00FF00"
-                    android:fontFamily="sans-serif-medium" />
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Índice de Calidad del Aire"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
 
+                <TextView
+                    android:id="@+id/text_subtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Última actualización: --/-- --:--"
+                    android:textSize="14sp"
+                    android:textColor="#B3FFFFFF"
+                    android:fontFamily="sans-serif"
+                    android:layout_marginTop="4dp" />
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Valores de Sensores -->
-        <TextView
-            android:id="@+id/text_description"
+        <!-- Contenedor del índice -->
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:layout_marginTop="4dp"
-            android:fontFamily="sans-serif"
-            android:text="La calidad del aire es buena."
-            android:textColor="#B3FFFFFF"
-            android:textSize="14sp" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="#292B36">
 
+            <TextView
+                android:id="@+id/text_air_quality_index"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="--"
+                android:textSize="48sp"
+                android:textColor="#00FF00"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/text_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Estado: --"
+                android:textSize="18sp"
+                android:textColor="#FFFFFF"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/text_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="La calidad del aire es buena."
+                android:textSize="14sp"
+                android:textColor="#B3FFFFFF"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+
+        <!-- Valores de Sensores -->
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:columnCount="3"
-            android:rowCount="2"
-            android:alignmentMode="alignBounds"
-            android:useDefaultMargins="true">
+            android:padding="16dp"
+            android:background="#292B36"
+            android:layout_marginBottom="16dp">
 
             <!-- PM2.5 -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:padding="16dp">
 
                 <TextView
                     android:id="@+id/text_pm25"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="--"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textColor="#00FF00"
                     android:fontFamily="sans-serif-medium" />
 
@@ -121,14 +132,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:padding="16dp">
 
                 <TextView
                     android:id="@+id/text_pm10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="--"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textColor="#00FF00"
                     android:fontFamily="sans-serif-medium" />
 
@@ -147,14 +159,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:padding="16dp">
 
                 <TextView
                     android:id="@+id/text_pm100"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="--"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textColor="#00FF00"
                     android:fontFamily="sans-serif-medium" />
 
@@ -173,14 +186,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:padding="16dp">
 
                 <TextView
                     android:id="@+id/text_pm25_env"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="--"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textColor="#00FF00"
                     android:fontFamily="sans-serif-medium" />
 
@@ -199,14 +213,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:padding="16dp">
 
                 <TextView
                     android:id="@+id/text_pm10_env"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="--"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textColor="#00FF00"
                     android:fontFamily="sans-serif-medium" />
 
@@ -225,14 +240,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:padding="16dp">
 
                 <TextView
                     android:id="@+id/text_pm100_env"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="--"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textColor="#00FF00"
                     android:fontFamily="sans-serif-medium" />
 
@@ -245,16 +261,56 @@
                     android:textColor="#B3FFFFFF"
                     android:fontFamily="sans-serif" />
             </LinearLayout>
-            <!-- Botón para actualizar -->
+        </GridLayout>
+
+        <!-- Sensor de Luz -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="#292B36">
+
+            <TextView
+                android:id="@+id/text_light_sensor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cantidad de luz: -- lux"
+                android:textSize="16sp"
+                android:textColor="#FFFFFF"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <!-- Botones -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="16dp">
+
             <Button
                 android:id="@+id/btn_update"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="#6200EE"
+                android:padding="12dp"
                 android:text="Actualizar"
-                android:layout_gravity="center"
-                android:padding="8dp"
+                android:textColor="#FFFFFF"
                 android:textSize="16sp"
-                android:layout_marginBottom="16dp" />
-        </GridLayout>
+                android:layout_marginEnd="8dp" />
+
+            <Button
+                android:id="@+id/btn_open_map"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#6200EE"
+                android:padding="12dp"
+                android:text="Mapa de comparación"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

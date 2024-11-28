@@ -1,6 +1,11 @@
 package com.example.araucaweathers
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -12,7 +17,8 @@ import okhttp3.Request
 import org.json.JSONObject
 import java.io.IOException
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SensorEventListener {
+
     private val client = OkHttpClient()
     private val serverUrl = "http://54.236.89.141:8081/sensor/data/latest"
 
@@ -28,8 +34,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var textPm25Env: TextView
     private lateinit var textPm10Env: TextView
     private lateinit var textPm100Env: TextView
+    private lateinit var textLightSensor: TextView
     private lateinit var btnUpdate: Button
+    private lateinit var btnOpenMap: Button // Botón para abrir el mapa
 
+    // Sensor Manager y Sensor de Luz
+    private lateinit var sensorManager: SensorManager
+    private var lightSensor: Sensor? = null
+
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -46,7 +59,17 @@ class MainActivity : AppCompatActivity() {
         textPm25Env = findViewById(R.id.text_pm25_env)
         textPm10Env = findViewById(R.id.text_pm10_env)
         textPm100Env = findViewById(R.id.text_pm100_env)
+        textLightSensor = findViewById(R.id.text_light_sensor)
         btnUpdate = findViewById(R.id.btn_update)
+        btnOpenMap = findViewById(R.id.btn_open_map) // Inicializa el botón
+
+        // Configurar SensorManager para el sensor de luz
+        sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
+        lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
+
+        if (lightSensor == null) {
+            textLightSensor.text = "Sensor de luz no disponible"
+        }
 
         // Cargar datos al iniciar la actividad
         loadSensorData()
@@ -55,6 +78,26 @@ class MainActivity : AppCompatActivity() {
         btnUpdate.setOnClickListener {
             loadSensorData()
         }
+
+        // Acción del botón para abrir el mapa
+        btnOpenMap.setOnClickListener {
+            val intent = Intent(this, MapActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Registrar el sensor de luz
+        lightSensor?.also {
+            sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_NORMAL)
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        // Desregistrar el sensor de luz para ahorrar batería
+        sensorManager.unregisterListener(this)
     }
 
     @SuppressLint("SetTextI18n")
@@ -138,5 +181,16 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    override fun onSensorChanged(event: SensorEvent?) {
+        if (event?.sensor?.type == Sensor.TYPE_LIGHT) {
+            val lightLevel = event.values[0] // Nivel de luz en lux
+            textLightSensor.text = "Cantidad de luz: $lightLevel lux"
+        }
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+        // No se necesita implementación en este caso
     }
 }

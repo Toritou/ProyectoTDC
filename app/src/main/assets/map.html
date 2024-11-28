@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Interactivo</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <style>
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+    // Crear el mapa centrado en Temuco
+    const map = L.map('map').setView([-38.7359, -72.5904], 13);
+
+    // Cargar mosaicos del mapa de OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+   // Agregar marcadores de ejemplo
+    const dataPoints = [
+    { lat: -38.7359, lng: -72.5904, label: "Temuco Centro - PM2.5: 40" },
+    { lat: -38.7450, lng: -72.6000, label: "Zona Industrial - PM2.5: 30" },
+    { lat: -38.7500, lng: -72.6100, label: "Hospital Regional - PM2.5: 35" },
+    { lat: -38.7400, lng: -72.6200, label: "Universidad UFRO - PM2.5: 28" },
+    { lat: -38.7300, lng: -72.6050, label: "Barrio Alemania - PM2.5: 50" },
+    { lat: -38.7200, lng: -72.5800, label: "Plaza Las Banderas - PM2.5: 45" },
+    { lat: -38.7550, lng: -72.6150, label: "Campus San Juan Pablo - PM2.5: 33" },
+    { lat: -38.7405, lng: -72.5905, label: "Estadio Germán Becker - PM2.5: 60" },
+    { lat: -38.7600, lng: -72.6000, label: "Parque Isla Cautín - PM2.5: 25" },
+    { lat: -38.7455, lng: -72.5800, label: "Terminal Rodoviario - PM2.5: 40" },
+    { lat: -38.7355, lng: -72.6205, label: "Mall Portal Temuco - PM2.5: 55" },
+];
+
+
+    dataPoints.forEach(point => {
+        L.marker([point.lat, point.lng]).addTo(map)
+            .bindPopup(point.label)
+            .openPopup();
+    });
+</script>
+</body>
+</html>

@@ -42,14 +42,16 @@ android {
         var enabled = true
     }
 }
-
 dependencies {
-    implementation(libs.androidx.core.ktx) // Core KTX
-    implementation(libs.androidx.appcompat) // AppCompat
-    implementation(libs.material) // Material Design
-    implementation(libs.androidx.activity) // Activity KTX
-    implementation(libs.androidx.constraintlayout) // ConstraintLayout
-    implementation(libs.okhttp) // OkHttp para solicitudes HTTP
+    // Core
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.constraintlayout)
+
+    // HTTP Client
+    implementation(libs.okhttp)
 
     // Dependencias de prueba
     testImplementation(libs.junit)
