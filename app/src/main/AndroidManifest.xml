@@ -28,7 +28,7 @@
 
         <!-- Declaración de la nueva MapActivity -->
         <activity
-            android:name="com.example.araucaweathers.MapActivity"
+            android:name="com.example.araucaweathers.MapActivity" 
             android:exported="true" />
     </application>
 
