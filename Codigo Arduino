@@ -1,0 +1,95 @@
+#include <Wire.h>
+#include "RAK12039_PMSA003I.h" // Librería para PMSA003I
+#include <WiFi.h>
+#include <HTTPClient.h>
+
+// Configuración de WiFi y servidor
+#define WIFI_SSID "Redmi Note 12 Pro 5G"
+#define WIFI_PASSWORD "danaaaaa"
+#define SERVER_URL "http://54.236.89.141:8081/sensor/data" // Nueva IP con puerto incluido
+
+// Configuración del sensor PMSA003I
+RAK_PMSA003I PMSA003I;
+#define SET_PIN WB_IO6 // Pin de configuración del sensor PMSA003I
+
+// Variables para temporización
+unsigned long previousMillis = 0;
+const long interval = 1000; // Enviar datos cada 1000 ms (1 segundo)
+
+void setup() {
+  // Configuración de Serial
+  Serial.begin(115200);
+  while (!Serial) delay(100);
+
+  // Conexión WiFi
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("\nConectado a WiFi");
+
+  // Inicialización de I2C
+  Wire.begin();
+
+  // Inicialización del sensor PMSA003I
+  pinMode(WB_IO2, OUTPUT);
+  digitalWrite(WB_IO2, HIGH);
+
+  pinMode(SET_PIN, OUTPUT);
+  digitalWrite(SET_PIN, HIGH);
+
+  while (!PMSA003I.begin()) {
+    Serial.println("Fallo al iniciar PMSA003I. Verifica la conexión.");
+    delay(1000);
+  }
+  Serial.println("PMSA003I inicializado correctamente.");
+}
+
+void loop() {
+  // Temporizador para enviar datos cada 1 segundo
+  unsigned long currentMillis = millis();
+  if (currentMillis - previousMillis >= interval) {
+    previousMillis = currentMillis;
+
+    // Lectura de datos del PMSA003I
+    PMSA_Data_t data;
+    bool pmsa_success = PMSA003I.readDate(&data);
+
+    // Construcción del JSON para los datos
+    String jsonData = "{";
+    if (pmsa_success) {
+      jsonData += "\"pm10_standard\":" + String(data.pm10_standard) + ",";
+      jsonData += "\"pm25_standard\":" + String(data.pm25_standard) + ",";
+      jsonData += "\"pm100_standard\":" + String(data.pm100_standard) + ",";
+      jsonData += "\"pm10_env\":" + String(data.pm10_env) + ",";
+      jsonData += "\"pm25_env\":" + String(data.pm25_env) + ",";
+      jsonData += "\"pm100_env\":" + String(data.pm100_env);
+    } else {
+      jsonData += "\"error\":\"No se pudieron leer los datos del PMSA003I\"";
+    }
+    jsonData += "}";
+
+    // Mostrar el JSON en el monitor serial
+    Serial.println("Datos enviados al servidor:");
+    Serial.println(jsonData); 
+
+    // Enviar los datos al servidor
+    if (WiFi.status() == WL_CONNECTED) {
+      HTTPClient http;
+      http.begin(SERVER_URL);
+      http.addHeader("Content-Type", "application/json");
+
+      int httpResponseCode = http.POST(jsonData);
+      if (httpResponseCode > 0) {
+        Serial.println("Datos enviados exitosamente al servidor.");
+      } else {
+        Serial.print("Error al enviar datos: ");
+        Serial.println(httpResponseCode);
+      }
+      http.end();
+    } else {
+      Serial.println("WiFi desconectado.");
+    }
+  }
+}
